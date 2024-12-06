@@ -3,7 +3,7 @@ name: cd-azure
 on:
   push:
     paths:
-      - ".github/workflows/cd-azure.yml"
+     # - ".github/workflows/cd-azure.yml"
       - "api/**"
   workflow_dispatch: # manual
 
