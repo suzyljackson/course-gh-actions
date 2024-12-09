@@ -8,19 +8,27 @@ on:
   workflow_dispatch: # manual
 
 jobs:
-  cross:   
-    runs-on: ubuntu-latest
-    defaults:
+  cross:
+     permissions:
+       contents: write
+     runs-on: ubuntu-latest
+     defaults:
       run:
         working-directory: upper
-    steps:
+     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-go@v5
         with:
           go-version: 1.22
           cache-dependency-path: ./upper/go.sum
       - run: ./build.xplat.sh  
-      - uses: actions/upload-artifact@v4
+      - uses: softprops/action-gh-release@v2
         with:
-           path: ./upper/bin/upper*
-           name: build
+         files: ./upper/bin/upper*
+         body: "Binaries for the upper (go) command line tool!!!"
+         tag_name: ${{ github.ref_name }}
+
+      # - uses: actions/upload-artifact@v4
+      #   with:
+      #      path: ./upper/bin/upper*
+      #      name: build
