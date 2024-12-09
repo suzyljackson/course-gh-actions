@@ -21,6 +21,6 @@ jobs:
           cache-dependency-path: ./upper/go.sum
       - run: ./build.xplat.sh  
       - uses: actions/upload-artifact@v4
-         with:
+        with:
            path: ./upper/bin/upper*
            name: build
