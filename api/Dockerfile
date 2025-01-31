@@ -26,6 +26,7 @@ RUN --mount=type=cache,id=nuget,target=/root/.nuget/packages \
 
 FROM mcr.microsoft.com/dotnet/aspnet:8.0-alpine AS runner
 WORKDIR /app
+WORKDIR /scrrt
 
 COPY --from=builder /app .
 
