@@ -35,3 +35,18 @@ jobs:
             return comment.data.id;
 
       - run: echo 'comment id=${{ steps.comment_script.outputs.result }}'
+
+      - name: Add label
+        uses: actions/github-script@v7
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            const issue_number = context.issue.number;
+            const owner = context.repo.owner;
+            const repo = context.repo.repo;
+
+            // add label to the issue
+            await github.rest.issues.addLabels({
+              repo, owner, issue_number,
+              labels: ["for-review"]
+            });
